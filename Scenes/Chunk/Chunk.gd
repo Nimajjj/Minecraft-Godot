@@ -23,7 +23,7 @@ func update():
 	render_mesh_indices = []
 	render_mesh_uvs = []
 	
-	voxels_map = world.chunks_map[self]		# Get chunk map
+	#voxels_map = world.chunks_map[self]		# Get chunk map
 	for x in range(0, len(voxels_map)):		# Loop through every block of the chunk
 		for z in range(0, len(voxels_map[x])):
 			for y in range(0, len(voxels_map[x][z])):
