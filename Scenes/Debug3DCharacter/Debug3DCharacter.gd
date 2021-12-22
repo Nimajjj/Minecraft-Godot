@@ -33,9 +33,10 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 	if Input.is_action_just_pressed("lmb"):
-		_raycast_handler(null)
+		_place_voxel(null)
 	if Input.is_action_just_pressed("rmb"):
-		_raycast_handler(0)
+		_place_voxel(-1)
+
 
 func _process(delta):
 	#camera physics interpolation to reduce physics jitter on high refresh-rate monitors
@@ -47,6 +48,7 @@ func _process(delta):
 	else:
 		camera.set_as_toplevel(false)
 		camera.global_transform = head.global_transform
+		
 		
 func _physics_process(delta):
 	#get keyboard input
@@ -61,10 +63,8 @@ func _physics_process(delta):
 	velocity = velocity.linear_interpolate(direction * speed, accel * delta)
 	var __ = move_and_slide(velocity, Vector3.UP)
 	
-	
-	
 
-func _raycast_handler(voxel):
+func _place_voxel(voxel):
 	if raycast.is_colliding():
 		var collision_pos = raycast.get_collision_point()
 		var collision_normal = raycast.get_collision_normal()

@@ -17,13 +17,12 @@ var voxels_map
 func _ready():
 	update()
 
-func update():
+func update() -> void:
 	render_mesh_vertices = []
 	render_mesh_normals = []
 	render_mesh_indices = []
 	render_mesh_uvs = []
 	
-	#voxels_map = world.chunks_map[self]		# Get chunk map
 	for x in range(0, len(voxels_map)):		# Loop through every block of the chunk
 		for z in range(0, len(voxels_map[x])):
 			for y in range(0, len(voxels_map[x][z])):
@@ -97,9 +96,10 @@ func _make_voxel(x, y, z, voxel_id) -> void:
 	
 func make_voxel_face(x, y, z, face, voxel_id) -> void:
 	var voxel_texture_unit = 1.0 / (96 / 32);
-	var voxel_data = VxDict.getVx(voxel_id)
+	var voxel_data = VOXELS.get_vx(voxel_id)
+	
 	var uv_position = voxel_data["texture"]
-	if (voxel_data.has("texture_" + face) == true):
+	if (voxel_data.has("texture_" + face)):
 		uv_position = voxel_data["texture_" + face]
 	
 	match face:
